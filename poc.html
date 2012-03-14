@@ -17,6 +17,8 @@
       <option value="default">Default</option>
       <option value="true-anaglyphs">True Anaglyphs</option>
       <option value="optimized-anaglyphs">Optimized Anaglyphs</option>
+      <option value="gray-anaglyphs">Gray Anaglyphs</option>
+      <option value="color-anaglyphs">Color Anaglyphs</option>
     </select>
 
     <hr />
@@ -51,19 +53,27 @@
             var b1 = pixels[i + 2];
             var b2 = pixels[i + 2 + img.width * 2];
 
-            // http://www.3dtv.at/knowhow/anaglyphcomparison_en.aspx
-
             switch (algorythm) {
-              case 'true-anaglyphs':
+            case 'true-anaglyphs':
               pixels[i + 0] = 0.299 * r1 + 0.587 * g1 + 0.114 * b1;
               pixels[i + 2] = 0.299 * r2 + 0.587 * g2 + 0.114 * b2;
               break;
-              case 'optimized-anaglyphs':
-              pixels[i + 0] = 0.7 * g1 + 0.3 * b1;        // ra
-              pixels[i + 1] = g2;                         // ga
-              pixels[i + 2] = b2;                         // ba
+            case 'optimized-anaglyphs':
+              pixels[i + 0] = 0.7 * g1 + 0.3 * b1;
+              pixels[i + 1] = g2;
+              pixels[i + 2] = b2;
               break;
-              default:
+            case 'gray-anaglyphs':
+              pixels[i + 0] = 0.299 * r1 + 0.587 * g1 + 0.114 * b1;
+              pixels[i + 1] = 0.299 * r2 + 0.587 * g2 + 0.114 * b2;
+              pixels[i + 2] = 0.299 * r2 + 0.587 * g2 + 0.114 * b2;
+              break;
+            case 'color-anaglyphs':
+              pixels[i + 0] = r1;
+              pixels[i + 1] = r2;
+              pixels[i + 2] = r2;
+              break;
+            default:
               break;
             }
           } else {
@@ -75,6 +85,7 @@
         ctx.putImageData(imageData, 0, 0);
         document.body.appendChild(canvas);
       }
+    img.src = 'images/statue2-3D-side-by-side-960.jpg';
     </script>
   </body>
 </html>
