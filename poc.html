@@ -19,6 +19,7 @@
       <option value="optimized-anaglyphs">Optimized Anaglyphs</option>
       <option value="gray-anaglyphs">Gray Anaglyphs</option>
       <option value="color-anaglyphs">Color Anaglyphs</option>
+      <option value="half-color-anaglyphs">Half Color Anaglyphs</option>
     </select>
 
     <hr />
@@ -70,6 +71,11 @@
               break;
             case 'color-anaglyphs':
               pixels[i + 0] = r1;
+              pixels[i + 1] = r2;
+              pixels[i + 2] = r2;
+              break;
+            case 'half-color-anaglyphs':
+              pixels[i + 0] = 0.299 * r1 + 0.587 * g1 + 0.114 * b1;
               pixels[i + 1] = r2;
               pixels[i + 2] = r2;
               break;
