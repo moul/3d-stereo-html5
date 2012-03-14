@@ -20,13 +20,17 @@
       <option value="gray-anaglyphs">Gray Anaglyphs</option>
       <option value="color-anaglyphs">Color Anaglyphs</option>
       <option value="half-color-anaglyphs">Half Color Anaglyphs</option>
+
+      <option value="grayscale">Grayscale</option>
+      <option value="brightness">Brightness</option>
+      <option value="threshold">Threshold</option>
     </select>
 
     <hr />
 
     <script>
       var canvas = document.createElement('canvas');
-      var algorythm = null;
+      var algorythm = 'default';
       var img = new Image;
       img.onload = function() {
         handleImg(img);
@@ -47,46 +51,70 @@
         for (var i = 0, il = pixels.length; i < il; i+= 4) {
           //var color = Math.random() * 255;
           if ((i / 4) % img.width < img.width / 2) {
-            var r1 = pixels[i + 0];
-            var r2 = pixels[i + 0 + img.width * 2];
-            var g1 = pixels[i + 1];
-            var g2 = pixels[i + 1 + img.width * 2];
-            var b1 = pixels[i + 2];
-            var b2 = pixels[i + 2 + img.width * 2];
+            var r1 = pixels[i + 0],
+              r2 = pixels[i + 0 + img.width * 2],
+              g1 = pixels[i + 1],
+              g2 = pixels[i + 1 + img.width * 2],
+              b1 = pixels[i + 2],
+              b2 = pixels[i + 2 + img.width * 2],
+              ra = 0,
+              ga = 0,
+              ba = 0;
 
             switch (algorythm) {
             case 'true-anaglyphs':
-              pixels[i + 0] = 0.299 * r1 + 0.587 * g1 + 0.114 * b1;
-              pixels[i + 2] = 0.299 * r2 + 0.587 * g2 + 0.114 * b2;
+              ra = 0.299 * r1 + 0.587 * g1 + 0.114 * b1;
+              ba = 0.299 * r2 + 0.587 * g2 + 0.114 * b2;
               break;
             case 'optimized-anaglyphs':
-              pixels[i + 0] = 0.7 * g1 + 0.3 * b1;
-              pixels[i + 1] = g2;
-              pixels[i + 2] = b2;
+              ra = 0.7 * g1 + 0.3 * b1;
+              ga = g2;
+              ba = b2;
               break;
             case 'gray-anaglyphs':
-              pixels[i + 0] = 0.299 * r1 + 0.587 * g1 + 0.114 * b1;
-              pixels[i + 1] = 0.299 * r2 + 0.587 * g2 + 0.114 * b2;
-              pixels[i + 2] = 0.299 * r2 + 0.587 * g2 + 0.114 * b2;
+              ra = 0.299 * r1 + 0.587 * g1 + 0.114 * b1;
+              ga = ba = 0.299 * r2 + 0.587 * g2 + 0.114 * b2;
               break;
             case 'color-anaglyphs':
-              pixels[i + 0] = r1;
-              pixels[i + 1] = r2;
-              pixels[i + 2] = r2;
+              ra = r1;
+              ga = r2;
+              ba = b2;
               break;
             case 'half-color-anaglyphs':
-              pixels[i + 0] = 0.299 * r1 + 0.587 * g1 + 0.114 * b1;
-              pixels[i + 1] = r2;
-              pixels[i + 2] = r2;
+              ra = 0.299 * r1 + 0.587 * g1 + 0.114 * b1;
+              ga = r2;
+              ba = b2;
+              break;
+            case 'grayscale':
+              var v = 0.299 * r1 + 0.587 * g1 + 0.114 * b1;
+              ra = ga = ba = v;
+              break;
+            case 'brightness':
+              var adjustment = 100;
+              ra = r1 + adjustment;
+              ga = g1 + adjustment;
+              ba = b1 + adjustment;
+              break;
+            case 'threshold':
+              var v = (r1 + 0.2126 * r1 + 0.7152 * g1 + 0.0722 * b1) ? 255 : 0;
+              ra = ga = ba = v;
+            break;
+            case 'default':
+              ra = r1;
+              ga = g1;
+              ba = b1;
               break;
             default:
               break;
             }
           } else {
-            pixels[i + 0] = 255;
-            pixels[i + 1] = 255;
-            pixels[i + 2] = 255;
+            ra = 255;
+            ga = 255;
+            ba = 255;
           }
+          pixels[i + 0] = ra;
+          pixels[i + 1] = ga;
+          pixels[i + 2] = ba;
         }
         ctx.putImageData(imageData, 0, 0);
         document.body.appendChild(canvas);
