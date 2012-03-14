@@ -13,10 +13,17 @@
       <option value="images/5305857371_a7b21074a2.jpg">5305857371_a7b21074a2.jpg</option>
     </select>
 
+    <select onChange="javascript:algorythm=this.value;handleImg(img);">
+      <option value="default">Default</option>
+      <option value="true-anaglyphs">True Anaglyphs</option>
+      <option value="optimized-anaglyphs">Optimized Anaglyphs</option>
+    </select>
+
     <hr />
 
     <script>
       var canvas = document.createElement('canvas');
+      var algorythm = null;
       var img = new Image;
       img.onload = function() {
         handleImg(img);
@@ -46,16 +53,19 @@
 
             // http://www.3dtv.at/knowhow/anaglyphcomparison_en.aspx
 
-            // True Analgyphs
-            //pixels[i + 0] = 0.299 * r1 + 0.587 * g1 + 0.114 * b1;
-            //pixels[i + 2] = 0.299 * r2 + 0.587 * g2 + 0.114 * b2;
-
-            // Optimized anaglyphs
-            pixels[i + 0] = 0.7 * g1 + 0.3 * b1;        // ra
-            pixels[i + 1] = g2;                         // ga
-            pixels[i + 2] = b2;                         // ba
-
-
+            switch (algorythm) {
+              case 'true-anaglyphs':
+              pixels[i + 0] = 0.299 * r1 + 0.587 * g1 + 0.114 * b1;
+              pixels[i + 2] = 0.299 * r2 + 0.587 * g2 + 0.114 * b2;
+              break;
+              case 'optimized-anaglyphs':
+              pixels[i + 0] = 0.7 * g1 + 0.3 * b1;        // ra
+              pixels[i + 1] = g2;                         // ga
+              pixels[i + 2] = b2;                         // ba
+              break;
+              default:
+              break;
+            }
           } else {
             pixels[i + 0] = 255;
             pixels[i + 1] = 255;
