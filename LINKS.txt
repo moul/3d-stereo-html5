@@ -3,3 +3,6 @@ http://www.3dtv.at/knowhow/anaglyphcomparison_en.aspx
 http://www.html5rocks.com/en/tutorials/canvas/imagefilters/
 http://coding.smashingmagazine.com/2011/08/30/optimize-images-with-html5-canvas/
 http://spyrestudios.com/html5-canvas-image-effects-black-white/
+
+http://gifdrole.com/gifs3d/bv000032.gif
+
