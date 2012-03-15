@@ -33,6 +33,7 @@
 
     <script>
       var canvas = document.createElement('canvas');
+      var canvas2 = document.createElement('canvas');
       var algorythm = 'default';
       var img = new Image;
       img.onload = function() {
@@ -120,7 +121,15 @@
           pixels[i + 2] = ba;
         }
         ctx.putImageData(imageData, 0, 0);
+
+        canvas2.width = img.width;
+        canvas2.height = img.height;
+        canvas.style.display = 'block';
+        var ctx2 = canvas2.getContext('2d');
+        ctx2.drawImage(img, 0, 0);
+
         document.body.appendChild(canvas);
+        document.body.appendChild(canvas2);
       }
     img.src = 'images/statue2-3D-side-by-side-960.jpg';
     </script>
