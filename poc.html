@@ -14,16 +14,19 @@
     </select>
 
     <select onChange="javascript:algorythm=this.value;handleImg(img);">
-      <option value="default">Default</option>
-      <option value="true-anaglyphs">True Anaglyphs</option>
-      <option value="optimized-anaglyphs">Optimized Anaglyphs</option>
-      <option value="gray-anaglyphs">Gray Anaglyphs</option>
-      <option value="color-anaglyphs">Color Anaglyphs</option>
-      <option value="half-color-anaglyphs">Half Color Anaglyphs</option>
-
-      <option value="grayscale">Grayscale</option>
-      <option value="brightness">Brightness</option>
-      <option value="threshold">Threshold</option>
+      <option value="default" selected>Default</option>
+      <optgroup label="3d renderers">
+        <option value="true-anaglyphs">True Anaglyphs</option>
+        <option value="optimized-anaglyphs">Optimized Anaglyphs</option>
+        <option value="gray-anaglyphs">Gray Anaglyphs</option>
+        <option value="color-anaglyphs">Color Anaglyphs</option>
+        <option value="half-color-anaglyphs">Half Color Anaglyphs</option>
+      </optgroup>
+      <optgroup label="not 3d effects">
+        <option value="grayscale">Grayscale</option>
+        <option value="brightness">Brightness</option>
+        <option value="threshold">Threshold</option>
+      </optgroup>
     </select>
 
     <hr />
