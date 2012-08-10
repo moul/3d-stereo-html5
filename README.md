@@ -3,6 +3,21 @@
 
 by Manfred Touron
 
+Example
+-------
+
+The side-by-side image :
+
+<img src="http://c387484.r84.cf1.rackcdn.com/jr/Screen%20Shot%202012-08-10%20at%202.42.18%20PM.png" />
+
+Optimized anaglyph result :
+
+<img src="http://c387484.r84.cf1.rackcdn.com/jr/Screen%20Shot%202012-08-10%20at%202.43.08%20PM.png" />
+
+Half-color anaglyph result :
+
+<img src="http://c387484.r84.cf1.rackcdn.com/jr/Screen%20Shot%202012-08-10%20at%202.43.54%20PM.png" />
+
 Demo
 ----
 
