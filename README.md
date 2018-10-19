@@ -1,6 +1,8 @@
 3d html5 canvas viewer
 ======================
 
+[![GuardRails badge](https://badges.production.guardrails.io/moul/3d-stereo-html5.svg)](https://www.guardrails.io)
+
 by Manfred Touron
 
 Example
